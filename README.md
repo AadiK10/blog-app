@@ -1,3 +1,7 @@
+## Live Demo
+
+https://blog-app-d7nf.onrender.com/register
+
 # Blog Application
 
 Simple blog web app built using:
