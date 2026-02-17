@@ -23,8 +23,8 @@ const loginForm = (req,res)=>{
 
 const login = async(req,res)=>{
     try {
-        const{email,password} = req.body
-        const user = await userModel.findOne({email})
+        const{name,password} = req.body
+        const user = await userModel.findOne({name})
         if(!user) res.end("User not registered")
         else if(await bcryptjs.compare(password,user.password)){
             req.session.username = user.name

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Title</title>
+        <title>Edit Content | Update</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -16,108 +16,516 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
-    </head>
+        
+        <!-- Font Awesome for icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Poppins', sans-serif;
+            }
 
-    <body class="text-dark bg-info">
-        <header class="text-center">
-            <!-- place navbar here -->
-             <nav
-                class="navbar navbar-expand-sm navbar-dark bg-dark"
-             >
-                <div class="container">
-                    <div class="collapse navbar-collapse" id="collapsibleNavId">
-                        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/dashboard" aria-current="page"
-                                    >Home
-                                    <span class="visually-hidden">(current)</span></a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/add">Add Data</a>
-                            </li>
-                        </ul>
-                        <form class="d-flex my-2 my-lg-0">
-                            <a
-                                name=""
-                                id=""
-                                class="btn btn-danger"
-                                href="/logout"
-                                role="button"
-                                >Logout</a
-                            >
-                            
-                        </form>
-                    </div>
+            body {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                position: relative;
+            }
+
+            /* Animated Background */
+            .bg-shape {
+                position: fixed;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.05);
+                animation: float 20s ease-in-out infinite;
+                z-index: 0;
+            }
+
+            .shape1 {
+                width: 500px;
+                height: 500px;
+                top: -250px;
+                right: -100px;
+                animation-delay: 0s;
+            }
+
+            .shape2 {
+                width: 600px;
+                height: 600px;
+                bottom: -300px;
+                left: -200px;
+                animation-delay: 5s;
+            }
+
+            @keyframes float {
+                0%, 100% { transform: translateY(0) rotate(0deg); }
+                50% { transform: translateY(-50px) rotate(10deg); }
+            }
+
+            /* Modern Navbar */
+            .navbar-modern {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                padding: 15px 0;
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+
+            .navbar-brand {
+                font-weight: 700;
+                font-size: 1.5rem;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .nav-link-custom {
+                color: #333;
+                font-weight: 500;
+                padding: 8px 20px !important;
+                border-radius: 50px;
+                transition: all 0.3s ease;
+                margin: 0 5px;
+            }
+
+            .nav-link-custom:hover,
+            .nav-link-custom.active {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white !important;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            }
+
+            .btn-logout {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                color: white;
+                border: none;
+                padding: 10px 25px;
+                border-radius: 50px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                display: inline-block;
+            }
+
+            .btn-logout:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(245, 87, 108, 0.4);
+                color: white;
+            }
+
+            /* Form Container */
+            .form-container {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                border-radius: 30px;
+                padding: 40px;
+                margin: 40px auto;
+                box-shadow: 0 30px 70px rgba(0, 0, 0, 0.2);
+                position: relative;
+                z-index: 1;
+                max-width: 700px;
+                animation: slideUp 0.6s ease-out;
+            }
+
+            @keyframes slideUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(50px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .form-header {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+
+            .form-header h2 {
+                font-size: 2.2rem;
+                font-weight: 700;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                margin-bottom: 10px;
+            }
+
+            .form-header p {
+                color: #888;
+                font-size: 1rem;
+            }
+
+            .form-header i {
+                font-size: 3rem;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                margin-bottom: 15px;
+            }
+
+            /* Form Fields */
+            .form-group {
+                margin-bottom: 25px;
+                position: relative;
+            }
+
+            .form-label {
+                font-weight: 600;
+                color: #444;
+                margin-bottom: 10px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 1rem;
+            }
+
+            .form-label i {
+                color: #667eea;
+                font-size: 1.1rem;
+            }
+
+            .form-control-modern {
+                width: 100%;
+                padding: 15px 20px;
+                border: 2px solid #eef2f7;
+                border-radius: 15px;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                background: #f8fafc;
+            }
+
+            .form-control-modern:focus {
+                outline: none;
+                border-color: #667eea;
+                background: white;
+                box-shadow: 0 5px 20px rgba(102, 126, 234, 0.1);
+            }
+
+            textarea.form-control-modern {
+                min-height: 120px;
+                resize: vertical;
+            }
+
+            /* Image Preview */
+            .image-preview {
+                margin-top: 15px;
+                border-radius: 15px;
+                overflow: hidden;
+                border: 2px dashed #667eea;
+                padding: 10px;
+                background: #f8fafc;
+            }
+
+            .preview-img {
+                width: 100%;
+                max-height: 200px;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+
+            /* Button Group */
+            .button-group {
+                display: flex;
+                gap: 15px;
+                margin-top: 20px;
+            }
+
+            .btn-update {
+                flex: 2;
+                padding: 16px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border: none;
+                border-radius: 15px;
+                color: white;
+                font-size: 1.1rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .btn-update::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                transition: left 0.5s ease;
+            }
+
+            .btn-update:hover::before {
+                left: 100%;
+            }
+
+            .btn-update:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            }
+
+            .btn-cancel {
+                flex: 1;
+                padding: 16px;
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                border: none;
+                border-radius: 15px;
+                color: white;
+                font-size: 1.1rem;
+                font-weight: 600;
+                text-decoration: none;
+                text-align: center;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .btn-cancel:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+                color: white;
+            }
+
+            /* Character Counter */
+            .char-counter {
+                text-align: right;
+                font-size: 0.8rem;
+                color: #888;
+                margin-top: 5px;
+            }
+
+            .char-counter i {
+                color: #667eea;
+                margin-right: 5px;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .form-container {
+                    padding: 30px 20px;
+                    margin: 20px;
+                }
+
+                .form-header h2 {
+                    font-size: 1.8rem;
+                }
+
+                .button-group {
+                    flex-direction: column;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .navbar-modern .container {
+                    flex-direction: column;
+                    gap: 15px;
+                }
+            }
+
+            /* Loading State */
+            .btn-update.loading {
+                pointer-events: none;
+                opacity: 0.8;
+            }
+
+            .btn-update.loading i {
+                animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Animated Background -->
+        <div class="bg-shape shape1"></div>
+        <div class="bg-shape shape2"></div>
+
+        <!-- Modern Navbar -->
+        <nav class="navbar-modern">
+            <div class="container">
+                <a class="navbar-brand" href="/dashboard">
+                    <i class="fas fa-crown me-2"></i>
+                    ContentManager
+                </a>
+                
+                <div class="d-flex align-items-center">
+                    <ul class="navbar-nav me-auto d-flex flex-row">
+                        <li class="nav-item">
+                            <a class="nav-link-custom" href="/dashboard">
+                                <i class="fas fa-home me-2"></i>Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link-custom" href="/add">
+                                <i class="fas fa-plus-circle me-2"></i>Add Data
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <a class="btn-logout ms-3" href="/logout">
+                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    </a>
                 </div>
-             </nav>
-        </header>
+            </div>
+        </nav>
+
         <main>
-            <div
-                class="container mt-5 col-6"
-            >
-                <form action="/edit/<%=bdata.id%>?_method=patch" method="post">
-                    <div class="mb-3">
-                        <label for="" class="form-label">Title</label>
+            <div class="form-container">
+                <div class="form-header">
+                    <i class="fas fa-edit"></i>
+                    <h2>Edit Content</h2>
+                    <p>Update the details below to modify your content</p>
+                </div>
+
+                <form action="/edit/<%=bdata.id%>?_method=patch" method="post" id="editForm">
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-heading"></i>
+                            Title
+                        </label>
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control-modern"
                             name="title"
-                            id=""
-                            aria-describedby="helpId"
-                            placeholder=""
                             value="<%=bdata.title%>"
+                            required
+                            maxlength="100"
+                            id="titleInput"
                         />
+                        <div class="char-counter">
+                            <i class="fas fa-text-width"></i>
+                            <span id="titleCount"><%=bdata.title.length%></span>/100
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Content</label>
-                        <textarea class="form-control" name="content" id="" rows="3"><%=bdata.content%></textarea>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-align-left"></i>
+                            Content
+                        </label>
+                        <textarea
+                            class="form-control-modern"
+                            name="content"
+                            required
+                            id="contentInput"
+                        ><%=bdata.content%></textarea>
+                        <div class="char-counter">
+                            <i class="fas fa-text-width"></i>
+                            <span id="contentCount"><%=bdata.content.length%></span> characters
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Image</label>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-image"></i>
+                            Image URL
+                        </label>
                         <input
-                            type="text"
-                            class="form-control"
+                            type="url"
+                            class="form-control-modern"
                             name="image"
-                            id=""
-                            aria-describedby="helpId"
-                            placeholder=""
                             value="<%=bdata.image%>"
+                            required
+                            id="imageInput"
                         />
+                        
+                        <!-- Image Preview -->
+                        <div class="image-preview">
+                            <img src="<%=bdata.image%>" alt="Preview" class="preview-img" id="previewImg" onerror="this.src='https://via.placeholder.com/200x200?text=Invalid+Image'">
+                        </div>
                     </div>
-                    
-                    <div class="mb-3">
-                        <label for="" class="form-label">Author</label>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-user"></i>
+                            Author
+                        </label>
                         <input
                             type="text"
-                            class="form-control"
+                            class="form-control-modern"
                             name="author"
-                            id=""
-                            placeholder=""
                             value="<%=bdata.author%>"
+                            required
                         />
                     </div>
-                    <button
-                        type="submit"
-                        class="btn btn-success"
-                    >
-                        Edit Data
-                    </button>
-                    
+
+                    <div class="button-group">
+                        <button type="submit" class="btn-update" id="updateBtn">
+                            <i class="fas fa-save"></i>
+                            Update Content
+                        </button>
+                        <a href="/dashboard" class="btn-cancel">
+                            <i class="fas fa-times"></i>
+                            Cancel
+                        </a>
+                    </div>
                 </form>
             </div>
-            
         </main>
-        <footer>
-            <!-- place footer here -->
-        </footer>
+
+        <script>
+            // Character Counter
+            const titleInput = document.getElementById('titleInput');
+            const contentInput = document.getElementById('contentInput');
+            const titleCount = document.getElementById('titleCount');
+            const contentCount = document.getElementById('contentCount');
+
+            if (titleInput) {
+                titleInput.addEventListener('input', function() {
+                    titleCount.textContent = this.value.length;
+                });
+            }
+
+            if (contentInput) {
+                contentInput.addEventListener('input', function() {
+                    contentCount.textContent = this.value.length;
+                });
+            }
+
+            // Image Preview on URL change
+            const imageInput = document.getElementById('imageInput');
+            const previewImg = document.getElementById('previewImg');
+
+            if (imageInput) {
+                imageInput.addEventListener('input', function() {
+                    previewImg.src = this.value.trim() || 'https://via.placeholder.com/200x200?text=No+Image';
+                });
+            }
+
+            // Form Loading State
+            document.getElementById('editForm')?.addEventListener('submit', function(e) {
+                const btn = document.getElementById('updateBtn');
+                btn.classList.add('loading');
+                btn.innerHTML = '<i class="fas fa-spinner"></i> Updating...';
+            });
+        </script>
+
         <!-- Bootstrap JavaScript Libraries -->
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
             integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
             crossorigin="anonymous"
         ></script>
-
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
             integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
