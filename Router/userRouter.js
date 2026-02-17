@@ -3,8 +3,8 @@ const { registerForm, register, loginForm, login, dashboard, logout } = require(
 
 const userRouter = express()
 
-userRouter.get("/register",registerForm)
-userRouter.post("/register",register)
+userRouter.get("/",registerForm)
+userRouter.post("/",register)
 
 userRouter.get("/login",loginForm)
 userRouter.post("/login",login)
