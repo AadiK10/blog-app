@@ -1,6 +1,6 @@
 ## Live Demo
 
-https://blog-app-d7nf.onrender.com/register
+https://blog-app-d7nf.onrender.com
 
 # Blog Application
 
