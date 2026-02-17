@@ -368,9 +368,138 @@
                 from { transform: rotate(0deg); }
                 to { transform: rotate(360deg); }
             }
+
+            .toast-notification {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                min-width: 350px;
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+                display: flex;
+                align-items: center;
+                padding: 16px 20px;
+                gap: 15px;
+                z-index: 9999;
+                animation: slideInRight 0.3s ease, fadeOut 0.3s ease 4.7s forwards;
+                border-left: 4px solid;
+            }
+
+            .toast-error {
+                border-left-color: #f5576c;
+            }
+
+            .toast-success {
+                border-left-color: #10b981;
+            }
+
+            .toast-icon i {
+                font-size: 1.5rem;
+            }
+
+            .toast-error .toast-icon i {
+                color: #f5576c;
+            }
+
+            .toast-success .toast-icon i {
+                color: #10b981;
+            }
+
+            .toast-content {
+                flex: 1;
+            }
+
+            .toast-title {
+                font-weight: 600;
+                font-size: 0.95rem;
+                color: #333;
+                margin-bottom: 4px;
+            }
+
+            .toast-message {
+                font-size: 0.85rem;
+                color: #666;
+            }
+
+            .toast-close {
+                background: none;
+                border: none;
+                color: #999;
+                cursor: pointer;
+                padding: 5px;
+                transition: all 0.3s ease;
+            }
+
+            .toast-close:hover {
+                color: #333;
+            }
+
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes fadeOut {
+                to {
+                    opacity: 0;
+                    transform: translateX(100%);
+                }
+            }
+
+            @media (max-width: 576px) {
+                .toast-notification {
+                    min-width: calc(100% - 40px);
+                    left: 20px;
+                    right: 20px;
+                }
+            }
         </style>
+
+        <script>
+            // Auto dismiss after 5 seconds
+            setTimeout(() => {
+                document.getElementById('errorToast')?.remove();
+                document.getElementById('successToast')?.remove();
+            }, 5000);
+        </script>
     </head>
     <body>
+        <% if (error_msg) { %>
+            <div class="toast-notification toast-error" id="errorToast">
+                <div class="toast-icon">
+                    <i class="fas fa-exclamation-circle"></i>
+                </div>
+                <div class="toast-content">
+                    <div class="toast-title">Error</div>
+                    <div class="toast-message"><%= error_msg %></div>
+                </div>
+                <button class="toast-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        <% } %>
+
+        <% if (success_msg) { %>
+            <div class="toast-notification toast-success" id="successToast">
+                <div class="toast-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="toast-content">
+                    <div class="toast-title">Success</div>
+                    <div class="toast-message"><%= success_msg %></div>
+                </div>
+                <button class="toast-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        <% } %>
         <!-- Animated background shapes -->
         <div class="shape shape1"></div>
         <div class="shape shape2"></div>

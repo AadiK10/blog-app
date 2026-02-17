@@ -347,7 +347,7 @@
             <div class="container">
                 <a class="navbar-brand" href="/dashboard">
                     <i class="fas fa-crown me-2"></i>
-                    ContentManager
+                    Blog Manager
                 </a>
                 
                 <div class="d-flex align-items-center">
@@ -375,8 +375,8 @@
             <div class="form-container">
                 <div class="form-header">
                     <i class="fas fa-plus-circle"></i>
-                    <h2>Create New Content</h2>
-                    <p>Fill in the details below to add new content to your dashboard</p>
+                    <h2>Create New Blog</h2>
+                    <p>Fill in the details below to add new blog to your dashboard</p>
                 </div>
 
                 <form action="/add" method="post" id="addForm">
@@ -458,7 +458,7 @@
 
                     <button type="submit" class="btn-submit" id="submitBtn">
                         <i class="fas fa-plus-circle"></i>
-                        Create Content
+                        Create Blog
                     </button>
                 </form>
             </div>
@@ -483,33 +483,53 @@
                 });
             }
 
-            // Image Preview
+            // ========== FIXED IMAGE PREVIEW - NO MORE BUFFERING ==========
             const imageInput = document.getElementById('imageInput');
             const imagePreview = document.getElementById('imagePreview');
             const previewImg = document.getElementById('previewImg');
+            let previewTimeout;
 
             if (imageInput) {
                 imageInput.addEventListener('input', function() {
+                    // Clear previous timeout
+                    clearTimeout(previewTimeout);
+                    
                     const url = this.value.trim();
-                    if (url) {
-                        previewImg.src = url;
-                        imagePreview.classList.add('show');
-                    } else {
+                    
+                    // Hide preview if empty
+                    if (!url) {
                         imagePreview.classList.remove('show');
+                        previewImg.src = '';
+                        return;
                     }
+                    
+                    // Wait for user to STOP typing (500ms) before loading image
+                    previewTimeout = setTimeout(() => {
+                        // Check if URL looks like an image (basic check)
+                        if (url.match(/\.(jpeg|jpg|gif|png|webp|bmp|svg)$/i) || 
+                            url.includes('images.') || 
+                            url.includes('placeholder')) {
+                            previewImg.src = url;
+                            imagePreview.classList.add('show');
+                        } else {
+                            // Don't try to load invalid URLs
+                            imagePreview.classList.remove('show');
+                        }
+                    }, 500);
                 });
             }
+
+            // Handle image load error with placeholder
+            previewImg.addEventListener('error', function() {
+                this.src = 'https://via.placeholder.com/200x200?text=Image+Preview';
+                imagePreview.classList.add('show');
+            });
 
             // Form Loading State
             document.getElementById('addForm')?.addEventListener('submit', function(e) {
                 const btn = document.getElementById('submitBtn');
                 btn.classList.add('loading');
                 btn.innerHTML = '<i class="fas fa-spinner"></i> Creating...';
-            });
-
-            // Handle image load error
-            previewImg.addEventListener('error', function() {
-                this.src = 'https://via.placeholder.com/200x200?text=Invalid+Image+URL';
             });
         </script>
 

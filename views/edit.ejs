@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Edit Content | Update</title>
+        <title>Edit Blog | Update</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -365,7 +365,7 @@
             <div class="container">
                 <a class="navbar-brand" href="/dashboard">
                     <i class="fas fa-crown me-2"></i>
-                    ContentManager
+                    Blog Manager
                 </a>
                 
                 <div class="d-flex align-items-center">
@@ -393,8 +393,8 @@
             <div class="form-container">
                 <div class="form-header">
                     <i class="fas fa-edit"></i>
-                    <h2>Edit Content</h2>
-                    <p>Update the details below to modify your content</p>
+                    <h2>Edit Blog</h2>
+                    <p>Update the details below to modify your blog</p>
                 </div>
 
                 <form action="/edit/<%=bdata.id%>?_method=patch" method="post" id="editForm">
@@ -472,7 +472,7 @@
                     <div class="button-group">
                         <button type="submit" class="btn-update" id="updateBtn">
                             <i class="fas fa-save"></i>
-                            Update Content
+                            Update Blog
                         </button>
                         <a href="/dashboard" class="btn-cancel">
                             <i class="fas fa-times"></i>
